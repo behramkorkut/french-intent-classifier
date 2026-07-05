@@ -8,7 +8,19 @@ dependencies = [
     # --- Étape 1 : socle ---
     "pydantic-settings>=2.3",  # configuration typée via .env
     "structlog>=24.1",         # logs structurés
+    # --- Étape 2 : données ---
+    "datasets>=3.0",           # téléchargement reproductible (HF) de MASSIVE fr-FR
+    "pandas>=2.2",             # manipulation tabulaire
+    "pyarrow>=16.0",           # parquet
+    "matplotlib>=3.8",         # graphique de distribution des intentions
+    # --- Étape 3 : baseline ---
+    "scikit-learn>=1.5",       # TF-IDF + régression logistique
+    "mlflow>=2.14",            # suivi d'expériences (baseline ET transformer)
 ]
+
+[project.scripts]
+intents-data = "intent_classifier.data.load:main"
+intents-train-baseline = "intent_classifier.modeling.baseline:main"
 
 [dependency-groups]
 dev = [

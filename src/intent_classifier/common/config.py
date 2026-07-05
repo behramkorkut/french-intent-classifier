@@ -28,10 +28,13 @@ class Settings(BaseSettings):
 
     # --- Données : MASSIVE (Amazon Science), locale française ---
     # ~11 500 phrases d'entraînement, 60 intentions réelles (assistants vocaux).
-    dataset_name: str = "AmazonScience/massive"
-    dataset_config: str = "fr-FR"
-    text_col: str = "utt"
-    label_col: str = "intent"
+    # On utilise le miroir SetFit « données pures » : le repo officiel
+    # AmazonScience/massive passe par un script de chargement (massive.py),
+    # que datasets >= 3 ne supporte plus.
+    dataset_name: str = "SetFit/amazon_massive_intent_fr-FR"
+    text_col: str = "text"
+    label_col: str = "label"
+    intent_col: str = "label_text"  # nom lisible de l'intention (ex. alarm_set)
 
     # --- Baseline (étape 3) ---
     baseline_max_features: int = 30_000  # vocabulaire TF-IDF

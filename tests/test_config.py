@@ -5,7 +5,7 @@ from intent_classifier.common.config import PROJECT_ROOT, settings
 
 def test_settings_defaults():
     assert settings.random_seed == 42
-    assert settings.dataset_config == "fr-FR"
+    assert settings.dataset_name.endswith("fr-FR")
     assert settings.transformer_model == "camembert-base"
 
 
