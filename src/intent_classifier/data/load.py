@@ -11,9 +11,13 @@ Sorties : data/{train,validation,test}.parquet + reports/intent_distribution.png
 
 from __future__ import annotations
 
-import matplotlib
+import os
 
-matplotlib.use("Agg")  # backend non interactif (sauvegarde fichier)
+# Backend non interactif, forcé AVANT l'import : Colab exporte
+# MPLBACKEND=module://matplotlib_inline.backend_inline, un backend propre à son
+# kernel que notre venv ne connaît pas — l'import de matplotlib planterait.
+os.environ["MPLBACKEND"] = "Agg"
+
 import matplotlib.pyplot as plt
 import pandas as pd
 import structlog
