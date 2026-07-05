@@ -1,0 +1,33 @@
+[project]
+name = "french-intent-classifier"
+version = "0.1.0"
+description = "Classification d'intentions en français — fine-tuning CamemBERT industrialisé (MASSIVE fr-FR) : baseline honnête, MLflow, ONNX, API"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    # --- Étape 1 : socle ---
+    "pydantic-settings>=2.3",  # configuration typée via .env
+    "structlog>=24.1",         # logs structurés
+]
+
+[dependency-groups]
+dev = [
+    "ruff>=0.9",     # linter + formatter
+    "pytest>=8.2",   # tests
+]
+
+[build-system]
+requires = ["uv_build>=0.11,<0.12"]
+build-backend = "uv_build"
+
+# Le projet s'appelle french-intent-classifier, le paquet Python intent_classifier.
+[tool.uv.build-backend]
+module-name = "intent_classifier"
+module-root = "src"
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B", "C4", "SIM"]

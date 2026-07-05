@@ -1,0 +1,38 @@
+# Python
+__pycache__/
+*.py[oc]
+build/
+dist/
+*.egg-info
+
+# Environnements
+.venv
+.env
+
+# Données (téléchargées, non versionnées)
+data/*
+!data/.gitkeep
+
+# Modèles entraînés (lourds — le modèle final sera sur le HF Hub ou en release)
+models/*
+!models/.gitkeep
+
+# Rapports générés
+reports/*
+!reports/.gitkeep
+!reports/*.png
+
+# MLflow
+mlruns/
+mlflow.db
+
+# Caches
+.pytest_cache/
+.ruff_cache/
+.DS_Store
+
+#journaldebord
+journal/*
+
+
+
