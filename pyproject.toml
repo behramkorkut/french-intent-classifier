@@ -26,6 +26,7 @@ dependencies = [
 intents-data = "intent_classifier.data.load:main"
 intents-train-baseline = "intent_classifier.modeling.baseline:main"
 intents-train-transformer = "intent_classifier.modeling.transformer:main"
+intents-evaluate = "intent_classifier.evaluation.compare:main"
 
 [dependency-groups]
 dev = [
