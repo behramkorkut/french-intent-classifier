@@ -20,6 +20,8 @@ dependencies = [
     "torch>=2.4",              # backend (CUDA sur Colab T4, MPS sur Mac, CPU sinon)
     "transformers>=4.48",      # CamemBERT + Trainer
     "accelerate>=1.0",         # requis par Trainer
+    # --- Étape 6 : optimisation d'inférence ---
+    "optimum[onnxruntime]>=1.23",  # export ONNX + quantification INT8
 ]
 
 [project.scripts]
@@ -27,6 +29,7 @@ intents-data = "intent_classifier.data.load:main"
 intents-train-baseline = "intent_classifier.modeling.baseline:main"
 intents-train-transformer = "intent_classifier.modeling.transformer:main"
 intents-evaluate = "intent_classifier.evaluation.compare:main"
+intents-optimize = "intent_classifier.optimization.onnx_export:main"
 
 [dependency-groups]
 dev = [
