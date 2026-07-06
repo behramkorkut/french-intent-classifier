@@ -1,0 +1,32 @@
+# CI : lint + format + tests à chaque push/PR.
+# Les tests d'intégration nécessitant les artefacts (modèle ONNX, parquets)
+# se skippent proprement — la CI valide le code, pas les poids.
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Installer uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+
+      - name: Environnement (lockfile gelé)
+        run: uv sync --frozen
+
+      - name: Lint
+        run: uv run ruff check .
+
+      - name: Format
+        run: uv run ruff format --check .
+
+      - name: Tests
+        run: uv run pytest -q

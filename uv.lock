@@ -762,6 +762,7 @@ source = { editable = "." }
 dependencies = [
     { name = "accelerate" },
     { name = "datasets" },
+    { name = "fastapi" },
     { name = "matplotlib" },
     { name = "mlflow" },
     { name = "optimum", extra = ["onnxruntime"] },
@@ -772,10 +773,12 @@ dependencies = [
     { name = "structlog" },
     { name = "torch" },
     { name = "transformers" },
+    { name = "uvicorn" },
 ]
 
 [package.dev-dependencies]
 dev = [
+    { name = "httpx" },
     { name = "pytest" },
     { name = "ruff" },
 ]
@@ -784,6 +787,7 @@ dev = [
 requires-dist = [
     { name = "accelerate", specifier = ">=1.0" },
     { name = "datasets", specifier = ">=3.0" },
+    { name = "fastapi", specifier = ">=0.110" },
     { name = "matplotlib", specifier = ">=3.8" },
     { name = "mlflow", specifier = ">=2.14" },
     { name = "optimum", extras = ["onnxruntime"], specifier = ">=1.23" },
@@ -794,10 +798,12 @@ requires-dist = [
     { name = "structlog", specifier = ">=24.1" },
     { name = "torch", specifier = ">=2.4" },
     { name = "transformers", specifier = ">=4.48" },
+    { name = "uvicorn", specifier = ">=0.29" },
 ]
 
 [package.metadata.requires-dev]
 dev = [
+    { name = "httpx", specifier = ">=0.27" },
     { name = "pytest", specifier = ">=8.2" },
     { name = "ruff", specifier = ">=0.9" },
 ]

@@ -22,6 +22,9 @@ dependencies = [
     "accelerate>=1.0",         # requis par Trainer
     # --- Étape 6 : optimisation d'inférence ---
     "optimum[onnxruntime]>=1.23",  # export ONNX + quantification INT8
+    # --- Étape 7 : serving ---
+    "fastapi>=0.110",          # API REST
+    "uvicorn>=0.29",           # serveur ASGI
 ]
 
 [project.scripts]
@@ -30,11 +33,13 @@ intents-train-baseline = "intent_classifier.modeling.baseline:main"
 intents-train-transformer = "intent_classifier.modeling.transformer:main"
 intents-evaluate = "intent_classifier.evaluation.compare:main"
 intents-optimize = "intent_classifier.optimization.onnx_export:main"
+intents-serve = "intent_classifier.serving.api:run"
 
 [dependency-groups]
 dev = [
     "ruff>=0.9",     # linter + formatter
     "pytest>=8.2",   # tests
+    "httpx>=0.27",   # TestClient FastAPI
 ]
 
 [build-system]

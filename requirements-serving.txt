@@ -1,0 +1,11 @@
+# Dépendances de l'image de SERVING uniquement — délibérément sans PyTorch :
+# le moteur de production est ONNX INT8, l'image reste légère.
+# Versions alignées sur uv.lock (contrat de versions entraînement/serving).
+fastapi>=0.110
+uvicorn>=0.29
+numpy>=1.26
+optimum[onnxruntime]==2.1.0
+transformers==4.57.6
+onnxruntime==1.27.0
+pydantic-settings>=2.3
+structlog>=24.1
