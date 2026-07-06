@@ -64,9 +64,7 @@ def test_clean_frames_keeps_genuine_ambiguity():
     from intent_classifier.data.load import clean_frames
 
     # même texte, deux labels différents = ambiguïté réelle, on garde
-    train = pd.DataFrame(
-        {"text": ["stop", "stop"], "label": [0, 1], "intent": ["mute", "cancel"]}
-    )
+    train = pd.DataFrame({"text": ["stop", "stop"], "label": [0, 1], "intent": ["mute", "cancel"]})
     frames = {
         "train": train,
         "validation": pd.DataFrame({"text": ["ok"], "label": [0], "intent": ["mute"]}),

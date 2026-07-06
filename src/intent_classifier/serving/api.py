@@ -48,9 +48,7 @@ def softmax(logits: np.ndarray) -> np.ndarray:
 def top_intents(logits: np.ndarray, id2label: dict[int, str], k: int = 3) -> list[dict]:
     probs = softmax(logits)
     order = np.argsort(probs)[::-1][:k]
-    return [
-        {"intent": id2label[int(i)], "confidence": round(float(probs[i]), 4)} for i in order
-    ]
+    return [{"intent": id2label[int(i)], "confidence": round(float(probs[i]), 4)} for i in order]
 
 
 # ---------- Moteur d'inférence ----------

@@ -91,18 +91,14 @@ def main() -> None:
     # gardent des ids stables).
     label2id, id2label = build_label_maps(train)
     if args.max_samples:
-        train = train.sample(
-            n=min(args.max_samples, len(train)), random_state=settings.random_seed
-        )
+        train = train.sample(n=min(args.max_samples, len(train)), random_state=settings.random_seed)
         log.info("smoke_test", train_size=len(train))
 
     tok = AutoTokenizer.from_pretrained(settings.transformer_model)
 
     def to_dataset(df: pd.DataFrame) -> Dataset:
         ds = Dataset.from_pandas(df[["text", "intent"]], preserve_index=False)
-        ds = ds.map(
-            lambda batch: {"labels": [label2id[i] for i in batch["intent"]]}, batched=True
-        )
+        ds = ds.map(lambda batch: {"labels": [label2id[i] for i in batch["intent"]]}, batched=True)
         ds = ds.map(lambda batch: tok(batch["text"], truncation=True, max_length=64), batched=True)
         return ds.remove_columns(["text", "intent"])
 
@@ -129,9 +125,9 @@ def main() -> None:
         weight_decay=0.01,
         eval_strategy="epoch",
         save_strategy="epoch",
-        load_best_model_at_end=True,          # le meilleur epoch, pas le dernier
+        load_best_model_at_end=True,  # le meilleur epoch, pas le dernier
         metric_for_best_model="macro_f1",
-        fp16=torch.cuda.is_available(),       # mixed precision sur T4
+        fp16=torch.cuda.is_available(),  # mixed precision sur T4
         seed=settings.random_seed,
         logging_steps=50,
         save_total_limit=1,

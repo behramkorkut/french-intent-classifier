@@ -148,13 +148,17 @@ def main() -> None:
 
     # --- 5) Rapport ---
     speedup = results["torch_fp32_cpu"]["p50_ms"] / results["onnx_int8"]["p50_ms"]
-    print(f"\n=== Benchmark d'inférence (CPU {platform.machine()}, batch=1, "
-          f"n={args.n_bench}, kernels {arch}) ===")
+    print(
+        f"\n=== Benchmark d'inférence (CPU {platform.machine()}, batch=1, "
+        f"n={args.n_bench}, kernels {arch}) ==="
+    )
     header = f"{'moteur':<16} {'macro-F1 val':>12} {'p50 ms':>8} {'p95 ms':>8} {'taille Mo':>10}"
     print(header)
     for name, r in results.items():
-        print(f"{name:<16} {r['val_macro_f1']:>12.4f} {r['p50_ms']:>8.2f} "
-              f"{r['p95_ms']:>8.2f} {r['size_mb']:>10.1f}")
+        print(
+            f"{name:<16} {r['val_macro_f1']:>12.4f} {r['p50_ms']:>8.2f} "
+            f"{r['p95_ms']:>8.2f} {r['size_mb']:>10.1f}"
+        )
     print(f"\nSpeed-up p50 (torch fp32 -> onnx int8) : x{speedup:.1f}")
 
     settings.reports_dir.mkdir(parents=True, exist_ok=True)

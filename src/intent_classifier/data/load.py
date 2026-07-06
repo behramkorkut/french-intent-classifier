@@ -39,9 +39,7 @@ def to_frames() -> dict[str, pd.DataFrame]:
     ds = load_dataset(settings.dataset_name)
     frames: dict[str, pd.DataFrame] = {}
     for split in SPLITS:
-        df = ds[split].to_pandas()[
-            [settings.text_col, settings.label_col, settings.intent_col]
-        ]
+        df = ds[split].to_pandas()[[settings.text_col, settings.label_col, settings.intent_col]]
         df = df.rename(
             columns={
                 settings.text_col: "text",

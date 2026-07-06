@@ -97,9 +97,7 @@ def top_confusions(y_true: list[str], y_pred: list[str], k: int = 10) -> pd.Data
     """Les k paires (vraie -> prédite) les plus confondues."""
     ct = pd.crosstab(pd.Series(y_true, name="vraie"), pd.Series(y_pred, name="prédite"))
     stacked = ct.stack()
-    stacked = stacked[
-        stacked.index.get_level_values(0) != stacked.index.get_level_values(1)
-    ]
+    stacked = stacked[stacked.index.get_level_values(0) != stacked.index.get_level_values(1)]
     top = stacked.sort_values(ascending=False).head(k)
     return top.rename("n").reset_index()
 
@@ -140,9 +138,7 @@ def main() -> None:
     (settings.reports_dir / "test_comparison.json").write_text(
         json.dumps(table.to_dict(orient="index"), indent=2)
     )
-    report = classification_report(
-        y_true, preds["camembert_ft"], output_dict=True, zero_division=0
-    )
+    report = classification_report(y_true, preds["camembert_ft"], output_dict=True, zero_division=0)
     pd.DataFrame(report).T.to_csv(settings.reports_dir / "per_class_f1.csv")
 
     mlflow.set_tracking_uri(settings.mlflow_tracking_uri)
