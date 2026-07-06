@@ -68,7 +68,21 @@ def main() -> None:
         default=None,
         help="Sous-échantillonne le train (smoke test local, ex. 500)",
     )
+    parser.add_argument(
+        "--overwrite",
+        action="store_true",
+        help="Autorise l'écrasement d'un modèle existant dans models/camembert",
+    )
     args = parser.parse_args()
+
+    # Garde-fou : ne jamais écraser silencieusement un modèle entraîné
+    # (ex. le run Colab rapatrié) avec un run local ou un smoke test.
+    out_check = settings.models_dir / "camembert" / "model.safetensors"
+    if out_check.exists() and not args.overwrite:
+        raise SystemExit(
+            f"Un modèle existe déjà ({out_check}).\n"
+            "Relance avec --overwrite si tu veux vraiment l'écraser."
+        )
 
     set_seed(settings.random_seed)
     train, val = load_split("train"), load_split("validation")

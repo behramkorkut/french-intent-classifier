@@ -31,13 +31,14 @@ Ouvre [colab.research.google.com](https://colab.research.google.com) → Nouveau
 ```
 
 ```python
-# 6. Rapatrier le modèle
-!zip -rq camembert.zip models/camembert
+# 6. Rapatrier le modèle (SANS les checkpoints : états d'optimiseur, ~4x le poids)
+!zip -rq camembert.zip models/camembert -x "models/camembert/checkpoints/*"
 from google.colab import files
 files.download("camembert.zip")
 ```
 
-De retour sur le Mac : dézipper dans `models/camembert/` à la racine du projet.
+De retour sur le Mac : dézipper **à la racine du projet** (le zip contient déjà le
+chemin `models/camembert/`) : `unzip camembert.zip` depuis `french-intent-classifier/`.
 
 > Smoke test local (Mac, ~2 min, sous-échantillon) avant de consommer du Colab :
 > `uv run intents-train-transformer --epochs 1 --max-samples 500`
